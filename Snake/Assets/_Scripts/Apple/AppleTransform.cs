@@ -5,13 +5,13 @@ public class AppleTransform : MonoBehaviour
     [SerializeField]
     Apple _applePref;
 
-    Apple apple;
+    Apple _apple;
 
     Box[,] _ground = new Box[10, 10];
     private void Start()
     {
-        apple = Instantiate(_applePref, new Vector3(4, 0.75f, 8), Quaternion.identity);
-        apple.Teleportation += MoveApple;
+        _apple = Instantiate(_applePref, new Vector3(4, 0.75f, 8), Quaternion.identity);
+        _apple.Teleportation += MoveApple;
     }
 
     void MoveApple()
@@ -24,9 +24,9 @@ public class AppleTransform : MonoBehaviour
             randZ = Random.Range(0, 9);
         } while (_ground[randX, randZ].OverGround);
 
-        apple.transform.position = new Vector3(randX, 0.75f, randZ);
+        _apple.transform.position = new Vector3(randX, 0.75f, randZ);
     }
 
     public void SetBoxInGround(Box box, int x, int z) => _ground[x, z] = box;
-    ~AppleTransform() => apple.Teleportation -= MoveApple;
+    ~AppleTransform() => _apple.Teleportation -= MoveApple;
 }

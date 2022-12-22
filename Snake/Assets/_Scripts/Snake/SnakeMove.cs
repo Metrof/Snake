@@ -11,24 +11,24 @@ public class SnakeMove : MonoBehaviour
     Vector3 _endHeadPos;
     Vector2 _currentDir;
 
-    Controls control;
+    Controls _control;
 
     private void Awake()
     {
         _endHeadPos = SetTarget();
-        control = new Controls();
+        _control = new Controls();
     }
     private void Start()
     {
         _timeBetweenChangeDir = 1 / _speed;
         _timeStart = Time.time;
     }
-    private void OnEnable() => control.Enable();
-    private void OnDisable() => control.Disable();
+    private void OnEnable() => _control.Enable();
+    private void OnDisable() => _control.Disable();
 
     private void FixedUpdate()
     {
-        if (control.SnakeMap.Move.ReadValue<Vector2>() != Vector2.zero) _receiveDir = control.SnakeMap.Move.ReadValue<Vector2>();
+        if (_control.SnakeMap.Move.ReadValue<Vector2>() != Vector2.zero) _receiveDir = _control.SnakeMap.Move.ReadValue<Vector2>();
         Move();
     }
     void Move()

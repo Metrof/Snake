@@ -3,13 +3,13 @@ using UnityEngine;
 public class SceneInit : MonoBehaviour
 {
     [SerializeField]
-    Box florPref;
+    Box _florPref;
 
     [SerializeField]
-    GameObject florAnchor;
+    GameObject _florAnchor;
 
     [SerializeField]
-    SnakeTail snakePref;
+    SnakeTail _snakePref;
 
     SceneOperator _sceneManager;
     Vector3 _snakeStartPos;
@@ -20,14 +20,14 @@ public class SceneInit : MonoBehaviour
         AppleTransform appleTransform = GetComponent<AppleTransform>();
 
         _snakeStartPos = new Vector3(4, 0.75f, 1);
-        SnakeTail snake = Instantiate(snakePref, _snakeStartPos, Quaternion.identity);
+        SnakeTail snake = Instantiate(_snakePref, _snakeStartPos, Quaternion.identity);
         snake.RestartEvent += _sceneManager.ReloadScene;
 
         for (int i = 0; i < 10; i++)
         {
             for (int y = 0; y < 10; y++)
             {
-                Box box = Instantiate(florPref, new Vector3(0 + i, 0, 0 + y), Quaternion.identity, florAnchor.transform);
+                Box box = Instantiate(_florPref, new Vector3(0 + i, 0, 0 + y), Quaternion.identity, _florAnchor.transform);
                 ChangeBoxMat(box, i, y);
                 appleTransform.SetBoxInGround(box, i, y);
             }

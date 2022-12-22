@@ -10,7 +10,7 @@ public class SnakeTail : MonoBehaviour, IAppleEater
     GameObject _tailPref;
 
     Transform _head;
-    float tailMagnitude = 1f;
+    float _tailMagnitude = 1f;
 
     List<Transform> _limbs = new List<Transform>();
     List<Vector3> _positions = new List<Vector3>();
@@ -23,19 +23,19 @@ public class SnakeTail : MonoBehaviour, IAppleEater
     {
         float distance = (_head.position - _positions[0]).magnitude;
 
-        if (distance > tailMagnitude)
+        if (distance > _tailMagnitude)
         {
             Vector3 direction = (_head.position - _positions[0]).normalized;
 
-            _positions.Insert(0, _positions[0] + direction * tailMagnitude);
+            _positions.Insert(0, _positions[0] + direction * _tailMagnitude);
             _positions.RemoveAt(_positions.Count - 1);
 
-            distance -= tailMagnitude;
+            distance -= _tailMagnitude;
         }
 
         for (int i = 0; i < _limbs.Count; i++)
         {
-            _limbs[i].position = Vector3.Lerp(_positions[i + 1], _positions[i], distance / tailMagnitude);
+            _limbs[i].position = Vector3.Lerp(_positions[i + 1], _positions[i], distance / _tailMagnitude);
         }
     }
     private void OnCollisionEnter(Collision collision)
